@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="GitHub Pages static demo for the credit default ML project.">
+    <title>Credit Default ML Lab</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="Credit Default ML Lab home">
+        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span>FIELDNOTES <b>/ ML LAB</b></span>
+      </a>
+      <span class="topbar-note"><span class="live-dot"></span> MODEL EXPLORER <span class="divider">/</span> UCI · 30K RECORDS</span>
+    </header>
+
+    <main>
+      <section class="intro">
+        <div class="intro-copy">
+          <p class="eyebrow"><span>01</span> CREDIT RISK · HANDS-ON STUDY</p>
+          <h1>Two models.<br><em>One dataset.</em></h1>
+          <p class="lede">Explore what a client’s profile can tell us. Estimate a credit limit with linear regression, or classify next-month default risk.</p>
+          <p class="notice">GitHub Pages demo version. Full Python API available locally via the FastAPI app.</p>
+        </div>
+        <aside class="dataset-note" aria-label="Dataset information">
+          <span class="dataset-label">THE DATASET</span>
+          <strong>Default of<br>Credit Card Clients</strong>
+          <span>Yeh · Taiwan · 2005</span>
+          <div class="dataset-rule"></div>
+          <span class="dataset-caption">30,000 accounts <i>·</i> 23 input variables</span>
+          <span class="dataset-caption">Classification label: next-month default</span>
+        </aside>
+      </section>
+
+      <section class="score-strip" aria-label="Model evaluation scores">
+        <div class="score-intro"><span class="eyebrow">TEST SET SNAPSHOT</span><span>Scores update after training.</span></div>
+        <div class="score-item"><span>LINEAR REGRESSION <small>R²</small></span><strong id="r2-score">—</strong></div>
+        <div class="score-item"><span>DEFAULT CLASSIFIER <small>ACCURACY</small></span><strong id="accuracy-score">—</strong></div>
+        <div class="score-item sample-size"><span>HELD-OUT ROWS</span><strong id="test-rows">—</strong></div>
+      </section>
+
+      <section class="models" aria-label="Model input forms">
+        <article class="model-card regression-card">
+          <div class="card-topline"><span class="model-index">01</span><span class="model-type">REGRESSION</span></div>
+          <h2>Estimate a credit limit</h2>
+          <p class="card-description">A linear regression model estimates the credit limit in NT dollars from a client profile.</p>
+          <form id="regression-form">
+            <div class="field-grid">
+              <label>Sex code <input name="sex" type="number" value="2" min="1" max="2" required><small>1 male · 2 female</small></label>
+              <label>Education code <input name="education" type="number" value="2" min="1" max="6" required><small>1 graduate · 2 university · 3 high school</small></label>
+              <label>Marital status <input name="marriage" type="number" value="2" min="1" max="3" required><small>1 married · 2 single · 3 other</small></label>
+              <label>Age <input name="age" type="number" value="35" min="18" max="120" required><small>Years</small></label>
+              <label>Most recent repayment <input name="pay_0" type="number" value="0" min="-2" max="8" required><small>-1 paid duly · positive means delay</small></label>
+              <label>Earlier repayment <input name="pay_2" type="number" value="0" min="-2" max="8" required><small>Prior month status</small></label>
+              <label>Latest bill amount <input name="bill_amt1" type="number" value="3913" step="0.01" required><small>NT dollars</small></label>
+              <label>Latest payment amount <input name="pay_amt1" type="number" value="0" step="0.01" required><small>NT dollars</small></label>
+            </div>
+            <button class="submit-button" type="submit"><span>Estimate credit limit</span><span aria-hidden="true">↗</span></button>
+            <div class="result" id="regression-result" role="status" aria-live="polite">Enter a profile and run the model.</div>
+          </form>
+        </article>
+
+        <article class="model-card classification-card">
+          <div class="card-topline"><span class="model-index">02</span><span class="model-type">CLASSIFICATION</span></div>
+          <h2>Classify default risk</h2>
+          <p class="card-description">A logistic regression classifier predicts whether a client defaults next month.</p>
+          <form id="classification-form">
+            <div class="field-grid">
+              <label>Credit limit <input name="limit_bal" type="number" value="50000" min="0" step="1000" required><small>NT dollars</small></label>
+              <label>Sex code <input name="sex" type="number" value="2" min="1" max="2" required><small>1 male · 2 female</small></label>
+              <label>Education code <input name="education" type="number" value="2" min="1" max="6" required><small>1 graduate · 2 university · 3 high school</small></label>
+              <label>Marital status <input name="marriage" type="number" value="2" min="1" max="3" required><small>1 married · 2 single · 3 other</small></label>
+              <label>Age <input name="age" type="number" value="35" min="18" max="120" required><small>Years</small></label>
+              <label>Most recent repayment <input name="pay_0" type="number" value="0" min="-2" max="8" required><small>-1 paid duly · positive means delay</small></label>
+              <label>Earlier repayment <input name="pay_2" type="number" value="0" min="-2" max="8" required><small>Prior month status</small></label>
+              <label>Latest bill amount <input name="bill_amt1" type="number" value="3913" step="0.01" required><small>NT dollars</small></label>
+              <label>Latest payment amount <input name="pay_amt1" type="number" value="0" step="0.01" required><small>NT dollars</small></label>
+            </div>
+            <button class="submit-button" type="submit"><span>Classify profile</span><span aria-hidden="true">↗</span></button>
+            <div class="result" id="classification-result" role="status" aria-live="polite">Enter a profile and run the model.</div>
+          </form>
+        </article>
+      </section>
+    </main>
+
+    <footer><span>FIELDNOTES / ML LAB</span><span>Educational prototype · Not financial advice</span><a href="https://archive.ics.uci.edu/dataset/350/default+of+credit+card+clients" target="_blank" rel="noreferrer">DATA SOURCE ↗</a></footer>
+    <script src="./app.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,7 @@
+{
+  "dataset_rows": 30000,
+  "test_rows": 6000,
+  "regression_r2": 0.2965,
+  "classification_accuracy": 0.808,
+  "classification_test_rows": 6000
+}
