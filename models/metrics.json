@@ -1,0 +1,9 @@
+{
+  "dataset_rows": 30000,
+  "test_rows": 6000,
+  "regression_target": "LIMIT_BAL (credit limit in NT dollars)",
+  "regression_r2": 0.2965,
+  "classification_target": "default_payment_next_month (0 or 1)",
+  "classification_accuracy": 0.808,
+  "classification_test_rows": 6000
+}
